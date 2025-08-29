@@ -67,6 +67,23 @@ final class PhotoListRowTests: XCTestCase {
         let view = PhotoListRow(photoListItem: item)
         XCTAssertNoThrow(try view.inspect().find(ViewType.AsyncImage.self))
     }
+
+    func testAsyncImageSuccessModifiers() throws {
+        let item = PhotoEntity(albumId: 2, id: 1, title: "Test Text", url: "https://example.com/image.jpg", thumbnailUrl: "http://www.7787.com")
+        let view = PhotoListRow(photoListItem: item)
+        let asyncImage = try view.inspect().find(ViewType.AsyncImage.self)
+        
+        // Simulate successful image load
+        let image = Image(systemName: "photo")
+        let loadedImageView = try asyncImage.contentView(.success(image))
+        
+        // Check modifiers
+        XCTAssertNoThrow(try loadedImageView.aspectRatio())
+        let frame = try loadedImageView.fixedWidth()
+        XCTAssertEqual(frame, 80)
+        let cornerRadius = try loadedImageView.cornerRadius()
+        XCTAssertEqual(cornerRadius, 8)
+    }
     
 }
 
