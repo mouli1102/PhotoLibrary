@@ -30,6 +30,7 @@ Infrastructure
     * SSLBypassDelegate.swift: Optional networking configuration for development environments
 * Utilities:
     * Supporting classes and extensions for common functionality
+      
 Dependency Injection
 The application uses dependency injection to maintain loose coupling between components:
 * ViewModels accept protocol interfaces rather than concrete implementations
